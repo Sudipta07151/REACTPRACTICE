@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-// import SeasonDisplay from './SeasonDisplay';
+import SeasonDisplay from './SeasonDisplay';
 
 //traditional/functional component
 
@@ -22,12 +22,24 @@ import ReactDOM from 'react-dom';
 
 class App extends React.Component {
     //constructor and super is a must
-    constructor(props) {
-        super(props);
-        this.state = {
-            lat: null,
-            errorMsg: ''
-        };
+    // constructor(props) {
+    //     super(props);
+    //     this.state = {
+    //         lat: null,
+    //         errorMsg: ''
+    //     };
+    // window.navigator.geolocation.getCurrentPosition(
+    //     (position) => {
+    //         //to set state object value we must use the setState({}) function(which take in a object as a parameter)
+    //         this.setState({ lat: position.coords.latitude });
+    //     },
+    //     (err) => {
+    //         this.setState({ errorMsg: err.message });
+    //     }
+    // );
+    state = { lat: null, errorMsg: '' };
+
+    componentDidMount() {
         window.navigator.geolocation.getCurrentPosition(
             (position) => {
                 //to set state object value we must use the setState({}) function(which take in a object as a parameter)
@@ -38,7 +50,6 @@ class App extends React.Component {
             }
         );
     }
-
     render() {
         // return (
         //     <div>
@@ -51,13 +62,24 @@ class App extends React.Component {
                 <div>Error: {this.state.errorMsg}</div>
             );
         }
+        else if (!this.state.lat) {
+            return <div>loading.....</div>
+        }
         else {
+            // return (
+            //     <div>Latitude: {this.state.lat}</div>
+            // );
             return (
-                <div>Latitude: {this.state.lat}</div>
+                <SeasonDisplay
+                    lat={this.state.lat}
+                />
             );
         }
-
     }
+    // componentDidUpdate() {
+    //     alert("COMPONENT UPDATED");
+    // }
+
 }
 
 
