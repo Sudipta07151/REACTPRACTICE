@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import SeasonDisplay from './SeasonDisplay';
+import LoaderDisplay from './LodaerDisplay';
 
 //traditional/functional component
 
@@ -50,20 +51,16 @@ class App extends React.Component {
             }
         );
     }
-    render() {
-        // return (
-        //     <div>
-        //         Latitude: {this.state.lat}
-        //         Error: {this.state.errorMsg}
-        //     </div>
-        // );
+
+    renderContent() {
         if (this.state.errorMsg && !this.state.lat) {
             return (
                 <div>Error: {this.state.errorMsg}</div>
             );
         }
         else if (!this.state.lat) {
-            return <div>loading.....</div>
+            return <LoaderDisplay message="Please give permission to access location" />
+            //<div>loading.....</div>
         }
         else {
             // return (
@@ -76,12 +73,25 @@ class App extends React.Component {
             );
         }
     }
-    // componentDidUpdate() {
-    //     alert("COMPONENT UPDATED");
-    // }
 
+    render() {
+        // return (
+        //     <div>
+        //         Latitude: {this.state.lat}
+        //         Error: {this.state.errorMsg}
+        //     </div>
+        // );
+
+        // componentDidUpdate() {
+        //     alert("COMPONENT UPDATED");
+        // }
+        return (
+            <div>
+                {this.renderContent()}
+            </div>
+        );
+    }
 }
-
 
 ReactDOM.render(
     <App />,
