@@ -1,9 +1,11 @@
+import '../components/css/imageStyle.css'
 import React from 'react'
+import ImageCard from './ImageCard'
 
 const ImageList = (props) => {
-    let images = props.images.map((image, index) => {
+    let images = props.images.map((image) => {
         return (
-            <li key={index}><img src={image.urls.regular} alt="" /></li>
+            <ImageCard key={image.id} image={image} id="ImageCard"/>
         )
     })
     if (!images.length) {
@@ -11,7 +13,7 @@ const ImageList = (props) => {
     }
     return (
         <div id="ImageList">
-            <ul>
+            <ul className="imgUL">
                 {images}
             </ul>
         </div>
